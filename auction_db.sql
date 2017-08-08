@@ -173,3 +173,33 @@ INSERT INTO bids VALUE
 (SELECT id_seller FROM sellers WHERE name_seller = 'Evgeniy'), 
 10000, 9500);
 */
+
+
+
+/*Auction results*/
+CREATE TABLE `auction_db`.`sales_result` (
+  `id_result` INT NOT NULL AUTO_INCREMENT,
+  `product_id` INT NOT NULL,
+  `start_price` INT NOT NULL,
+  `sale_price` INT NOT NULL,
+  `seller_id` INT NOT NULL,
+  `buyer_id` INT NOT NULL,
+  PRIMARY KEY (`id_result`),
+  INDEX `product_id_idx` (`product_id` ASC),
+  INDEX `seller_id_idx` (`seller_id` ASC),
+  INDEX `buyer_id_idx` (`buyer_id` ASC),
+  CONSTRAINT `product_id`
+    FOREIGN KEY (`product_id`)
+    REFERENCES `auction_db`.`products` (`id_product`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `seller_id`
+    FOREIGN KEY (`seller_id`)
+    REFERENCES `auction_db`.`sellers` (`id_seller`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `buyer_id`
+    FOREIGN KEY (`buyer_id`)
+    REFERENCES `auction_db`.`buyers` (`id_buyer`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
